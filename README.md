@@ -2,7 +2,7 @@
 
 This repository contains my independent implementations of the three LAuReL variants described in the article titled **"LAuReL: Learned Augmented Residual Layer"**. These implementations aim to explore the concepts presented in the paper and evaluate their effectiveness on image datasets. 
 
-Original article  ![LAUREL: Learned Augmented Residual Layer]( https://arxiv.org/pdf/2411.07501)
+Original article  [LAUREL: Learned Augmented Residual Layer]( https://arxiv.org/pdf/2411.07501)
 ## ⚠️ Disclaimer
 
 - **Unofficial Code**: This project is my interpretation of the LAuReL blocks based on the descriptions in the paper. Until the authors release the official implementation, there is no guarantee that this code exactly replicates their methodology. 
