@@ -1,9 +1,10 @@
 import torch.nn as nn
 from LAuReL import LAuReLBlock
+from LAuReL_PA import LAuReL_PABlock
+from LAuRel_LR import LAuReL_LRBlock
 from TrainUtil import train_and_evaluate
 # A
-# from LAuReL_PABlock import LAuReL_PABlock
-# from LAuReL_LiteBlock import LAuReL_LiteBlock
+
 
 # Simple CNN with LAuReL Blocks
 class SmallCNN(nn.Module):
@@ -31,6 +32,17 @@ class SmallCNN(nn.Module):
         x = self.fc(x)
         return x
     
+class SmallCNNLR(SmallCNN):
+    def __init__(self):
+        super().__init__()
+        self.laurel_block = LAuReL_LRBlock(in_channels=32, out_channels=32)
+        
+class SmallCNNPA(SmallCNN):
+    def __init__(self):
+        super().__init__()
+        self.laurel_block = LAuReL_PABlock(in_channels=32, out_channels=32)
+       
+    
 if __name__ == "__main__":
     # Train and evaluate with LAuReL
     model_lr = SmallCNN()
@@ -38,9 +50,9 @@ if __name__ == "__main__":
     train_and_evaluate(model_lr)
 
     # Train and evaluate with LAuReL_LR
-    # model_pa = SmallCNN() # with LAuReL_LRBlock changed implemenation
-    # train_and_evaluate(model_pa)
+    model_pa = SmallCNNLR() # with LAuReL_LRBlock changed implemenation
+    train_and_evaluate(model_pa)
 
     # Train and evaluate with LAuReL_PA
-    # model_pa = SmallCNN() # with LAuReL_PABlock changed implemenation
-    # train_and_evaluate(model_pa)
+    model_pa = SmallCNNPA() # with LAuReL_PABlock changed implemenation
+    train_and_evaluate(model_pa)

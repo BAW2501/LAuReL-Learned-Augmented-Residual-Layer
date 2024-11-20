@@ -1,7 +1,7 @@
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+from torch.nn.functional import softmax
 
 class LAuReLBlock(nn.Module):
     def __init__(self, in_channels, out_channels):
@@ -24,7 +24,7 @@ class LAuReLBlock(nn.Module):
         f_x = self.relu(f_x)
         
         # Normalize α and β with softmax
-        alpha, beta = F.softmax(self.weights, dim=0)
+        alpha, beta = softmax(self.weights, dim=0)
         
         # Compute the output as α * f(x) + β * x
         out = alpha * f_x + beta * x

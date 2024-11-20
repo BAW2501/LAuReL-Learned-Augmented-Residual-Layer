@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 class LAuReL_PABlock(nn.Module):
     def __init__(self, in_channels, out_channels, rank=16, num_layers=5):
