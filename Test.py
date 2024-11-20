@@ -2,6 +2,7 @@ import torch.nn as nn
 from LAuReL import LAuReLBlock
 from LAuReL_PA import LAuReL_PABlock
 from LAuRel_LR import LAuReL_LRBlock
+from ResNet import ResBlock
 from TrainUtil import train_and_evaluate
 # A
 
@@ -41,18 +42,30 @@ class SmallCNNPA(SmallCNN):
     def __init__(self):
         super().__init__()
         self.laurel_block = LAuReL_PABlock(in_channels=32, out_channels=32)
+    def reset_activations(self):
+        """Reset the activations in all LAuReL-PA blocks"""
+        self.laurel_block.reset_activations()
+        
+class SmallCNNResNet(SmallCNN):
+    def __init__(self):
+        super().__init__()
+        self.laurel_block = ResBlock(in_channels=32, out_channels=32)
        
     
 if __name__ == "__main__":
-    # Train and evaluate with LAuReL
-    model_lr = SmallCNN()
-    print("Training with LAuReL Block")
-    train_and_evaluate(model_lr)
+    # # Train and evaluate with LAuReL
+    # model_lr = SmallCNN()
+    # print("Training with LAuReL Block")
+    # train_and_evaluate(model_lr)
 
-    # Train and evaluate with LAuReL_LR
-    model_pa = SmallCNNLR() # with LAuReL_LRBlock changed implemenation
-    train_and_evaluate(model_pa)
+    # # Train and evaluate with LAuReL_LR
+    # model_pa = SmallCNNLR() # with LAuReL_LRBlock changed implemenation
+    # train_and_evaluate(model_pa)
 
     # Train and evaluate with LAuReL_PA
     model_pa = SmallCNNPA() # with LAuReL_PABlock changed implemenation
     train_and_evaluate(model_pa)
+    
+    # # Train and evaluate with ResNet
+    # model_pa = SmallCNNResNet() # with ResBlock changed implemenation
+    # train_and_evaluate(model_pa)
