@@ -4,8 +4,6 @@ from LAuReL_PA import LAuReL_PABlock
 from LAuRel_LR import LAuReL_LRBlock
 from ResNet import ResBlock
 from TrainUtil import train_and_evaluate
-# A
-
 
 # Simple CNN with LAuReL Blocks
 class SmallCNN(nn.Module):
@@ -53,19 +51,19 @@ class SmallCNNResNet(SmallCNN):
        
     
 if __name__ == "__main__":
-    # # Train and evaluate with LAuReL
-    # model_lr = SmallCNN()
-    # print("Training with LAuReL Block")
-    # train_and_evaluate(model_lr)
+    # Train and evaluate with LAuReL
+    model_lr = SmallCNN()
+    print("Training with LAuReL Block")
+    train_and_evaluate(model_lr)
 
-    # # Train and evaluate with LAuReL_LR
-    # model_pa = SmallCNNLR() # with LAuReL_LRBlock changed implemenation
-    # train_and_evaluate(model_pa)
-
-    # Train and evaluate with LAuReL_PA
-    model_pa = SmallCNNPA() # with LAuReL_PABlock changed implemenation
+    # Train and evaluate with LAuReL_LR
+    model_pa = SmallCNNLR() # with LAuReL_LRBlock changed implemenation
     train_and_evaluate(model_pa)
+
+    # # Train and evaluate with LAuReL_PA
+    # model_pa = SmallCNNPA() # with LAuReL_PABlock changed implemenation
+    # train_and_evaluate(model_pa)
     
     # # Train and evaluate with ResNet
-    # model_pa = SmallCNNResNet() # with ResBlock changed implemenation
-    # train_and_evaluate(model_pa)
+    model_pa = SmallCNNResNet() # with ResBlock changed implemenation
+    train_and_evaluate(model_pa)
