@@ -27,6 +27,8 @@ class LAuReL_PABlock(nn.Module):
         self.gammas = nn.Parameter(torch.ones(num_layers))  # γ_j for j = 0 to num_layers-1
 
         # Buffer for previous activations
+        self.register_buffer('num_stored', torch.tensor(0))
+        self.max_layers = num_layers
         self.previous_activations = []
 
     def forward(self, x):
@@ -47,10 +49,10 @@ class LAuReL_PABlock(nn.Module):
             # Weighted contribution γ_j * ABx_j
             contribution += self.gammas[j] * AB_prev_x
         
-        # Add the current activation to the buffer
-        self.previous_activations.append(x)
-        if len(self.previous_activations) > len(self.gammas):
-            self.previous_activations.pop(0)  # Maintain fixed buffer size
+        # Store current activation (detached from computation graph)
+        if len(self.previous_activations) >= self.max_layers:
+            self.previous_activations.pop(0)
+        self.previous_activations.append(x.detach().clone())
 
         # Output: f(x) + Σ γ_j * ABx_j + x
         out = f_x + contribution + x
