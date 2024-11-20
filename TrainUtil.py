@@ -37,6 +37,10 @@ def train_and_evaluate(model, epochs=10):
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
+            try:
+                model.reset_activations()
+            except AttributeError:
+                pass
             running_loss += loss.item()
         print(f"Epoch {epoch+1}/{epochs}, Loss: {running_loss / len(train_loader):.4f}")
 

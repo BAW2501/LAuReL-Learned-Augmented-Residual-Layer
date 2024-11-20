@@ -55,6 +55,9 @@ class LAuReL_PABlock(nn.Module):
         # Output: f(x) + Σ γ_j * ABx_j + x
         out = f_x + contribution + x
         return out
+    def reset_activations(self):
+        """Reset the stored activations"""
+        self.previous_activations = []
 
 
 # Example usage
